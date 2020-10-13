@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 class Create extends Component{
   constructor(props){
     super(props);
@@ -8,7 +9,17 @@ class Create extends Component{
 
   onSubmit = (event) => {
     event.preventDefault();
-    this.props.Add(this.nameInput.value,this.dobInput.value);
+    var letters = /^[A-Za-z]+$/
+    var dateRegex =  /^\d{4}-\d{2}-\d{2}$/;
+    if (this.nameInput.value === "" || this.dobInput.value === ""){
+      alert("Please complete the empty fields.");
+    }else if(!this.nameInput.value.match(letters)){
+      alert('Please input alphabet characters only at Name field.')
+    }else if(!this.dobInput.value.match(dateRegex)){
+      alert('Please input date as YYYY-MM-DD.')
+    }else{
+     this.props.Add(this.nameInput.value,this.dobInput.value);
+    }
   }
   render(){
     return(
@@ -16,7 +27,7 @@ class Create extends Component{
         <h3>Create Employee</h3>
         <input placeholder = "Name" ref={nameInput => this.nameInput = nameInput}/>
         <input placeholder = "Date of Birth" ref={dobInput => this.dobInput = dobInput}/>
-        <button>Create</button>
+        <button className= "btn btn-primary">Create</button>
       </form>
     )
   }
