@@ -1,11 +1,11 @@
 var Employee = require("./model.js");
 
-exports.read = function(req, res) {
-  Employee.getEmployee(function(err, employee) {
+exports.read =  function(req, res) {
+   Employee.getEmployee(async function(err, employee) {
     if (err)
       res.send(err);
       console.log("res", employee);
-    res.send(employee);
+     await res.send(employee);
   });
 };
 
